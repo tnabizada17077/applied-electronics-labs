@@ -15,3 +15,9 @@ Every laboratory module nested within this directory transitions core academic c
 * **Simulation Verification:** Utilizing **LTspice** to build, simulate, and stress-test converter topologies, confirming that physical waveforms match theoretical mathematical models.
 * **Component-Level Design:** Evaluating power semiconductor switches (MOSFETs, diodes), magnetic core selections (inductors, transformers), and filter capacitors based on ripple requirements and efficiency goals.
 * **Control Loop Compensation:** Designing feedback networks, deriving small-signal AC models, and evaluating loop-gain transfer functions to ensure system stability under dynamic load conditions.
+
+---
+
+## 🗂️ Course Directory
+
+*   **[Module 01: Boost Converter Simulation](./01-boost-converter-simulation/README.md)** -Open-loop verification, component sizing, and switching and driver subcircuit modeling.
