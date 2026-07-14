@@ -1,0 +1,3 @@
+# Fundamentals of Power Electronics (CU Boulder)
+
+This directory contains my technical coursework, simulation models, and design reports for the Power Electronics curriculum. Each project here bridges the gap between theoretical circuit analysis—such as steady-state converter modeling and transfer function derivation—and practical implementation using LTspice. These laboratory modules demonstrate my approach to designing efficient power conversion systems, focusing on component selection, loop compensation, and rigorous performance verification.
