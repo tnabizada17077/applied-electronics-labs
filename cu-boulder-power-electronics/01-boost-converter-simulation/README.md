@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./images/fullTransient.png" width="450" alt="Full Output Voltage Transient">
+</p>
+
 ## What	is	the	steady-state average	output	voltage	(expressed	in	volts)?
 
 ### 1. The Ideal Math vs. The Real World
@@ -10,7 +14,9 @@ Real circuits have losses, so the simulation won't hit a perfect $40\text{ V}$. 
 
 * **Theoretical Perfect Output:** $40.0\text{ V}$
 * **Actual Simulated Average :** `40.101 V`
-![Full Transient](./images/avgVoltage.png)
+<p align="center">
+  <img src="./images/avgVoltage.png" width="450" alt="Full Output Voltage Transient">
+</p>
 
 ### 3. Where did the missing voltage go?
 Our simulated components aren't perfect, and three main culprits are "stealing" that extra voltage:
@@ -19,3 +25,8 @@ Our simulated components aren't perfect, and three main culprits are "stealing" 
 3. **The MOSFET Switch ($M1$):** The `IRFS4010` transistor isn't a perfect conductor; it has a tiny internal resistance when turned on.
 
 ## 2.	What	is	the	steady-state	average	inductor	current	(in	amps)?
+## 3.   What is the steady-state output power (in watts)?
+## 4.   What is the average power drawn out of the input source Vg during steady-state operation of the converter (in watts)?
+## 5.   What is the average power consumption of the gate driver (in watts)?
+## 6.   What is the converter efficiency (enter a numeric value between 0 and 1)?
+## 7.   Now change the control voltage input to the pulse-width modulator, so that it produces a control signal having a duty cycle of 0.6. Run the simulation again. What is the new steady-state average output voltage?
