@@ -17,3 +17,5 @@ Our simulated components aren't perfect, and three main culprits are "stealing" 
 1. **The Inductor's Wire ($R_L = 100\text{ m}\Omega$):** The inductor has internal copper resistance that burns off power as heat.
 2. **The Diode Drop ($D1$):** The `RF1601NS2D` diode takes about $0.8\text{ V}$ to $1\text{ V}$ just to let current pass through it.
 3. **The MOSFET Switch ($M1$):** The `IRFS4010` transistor isn't a perfect conductor; it has a tiny internal resistance when turned on.
+
+## 2.	What	is	the	steady-state	average	inductor	current	(in	amps)?
