@@ -9,7 +9,8 @@ $$V_{out} = \frac{V_g}{1 - D} = \frac{24\text{ V}}{1 - 0.4} = 40.0\text{ V}$$
 Real circuits have losses, so the simulation won't hit a perfect $40\text{ V}$. After letting the simulation run and settle down ($4.5\text{ ms}$ to $5.0\text{ ms}$), I used `Ctrl + Click` on the `V(vout)` trace to find the true average:
 
 * **Theoretical Perfect Output:** $40.0\text{ V}$
-* **Actual Simulated Average ($V_{out\_avg}$):** ``
+* **Actual Simulated Average ($V_{out\_avg}$):** `40.1`
+
 
 ### 3. Where did the missing voltage go?
 Our simulated components aren't perfect, and three main culprits are "stealing" that extra voltage:
