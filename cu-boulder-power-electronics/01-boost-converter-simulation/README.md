@@ -34,9 +34,9 @@ These simulated components aren't perfect, and three main culprits are "stealing
 ## 4.   What is the average power drawn out of the input source Vg during steady-state operation of the converter (in watts)?
 84.75
 ## 5.   What is the average power consumption of the gate driver (in watts)?
--204.31mW (incorrect)
+-204.31mW (incorrect) -->0.20431
 ## 6.   What is the converter efficiency (enter a numeric value between 0 and 1)?
 The formula used:
 $$\eta = \frac{80.375\text{ W}}{84.754\text{ W}} \approx \mathbf{0.94833}$$
 ## 7.   Now change the control voltage input to the pulse-width modulator, so that it produces a control signal having a duty cycle of 0.6. Run the simulation again. What is the new steady-state average output voltage?
-180.72 (incorrect)
+180.72 (incorrect)-->60.079
