@@ -18,16 +18,33 @@ Real circuits have losses, so the simulation won't hit a perfect $40\text{ V}$. 
   <img src="./images/avgVoltage.png" width="450" alt="Full Output Voltage Transient">
 </p>
 
-### Analysis: Sources of Voltage Difference
-These simulated components aren't perfect, and three main culprits are "stealing" that extra voltage:
+These simulated components are "stealing" that extra voltage:
+
 1. **The Inductor's Wire ($R_L = 100\text{ m}\Omega$):** The inductor has internal copper resistance that burns off power as heat.
 2. **The Diode Drop ($D1$):** The `RF1601NS2D` diode takes about $0.8\text{ V}$ to $1\text{ V}$ just to let current pass through it.
 3. **The MOSFET Switch ($M1$):** The `IRFS4010` transistor isn't a perfect conductor; it has a tiny internal resistance when turned on.
 
 ## 2.	What	is	the	steady-state	average	inductor	current	(in	amps)?
+
+### Theoretical Expected Value
+In a boost converter, the inductor is in series with the input source, so its average current must equal the input current. Using power balance:
+
+$$I_{in,avg} = \frac{P_{in}}{V_g} = \frac{P_{out}}{V_g \cdot \eta}$$
+
+From the output power (80.4 W) and knowing losses exist, the input current should be roughly:
+
+$$I_{in,avg} \approx \frac{84.75\text{ W}}{24\text{ V}} \approx 3.53\text{ A}$$
+
+### What LTspice Actually Measured
+After the circuit reached steady state (interval: 4.82 ms to 4.99999 ms):
+
+* **Average Inductor Current:** `3.52666 A`
+* **RMS Inductor Current:** `3.5384 A`
 <p align="center">
   <img src="./images/avgCurrent.png" width="450" alt="Full Output Voltage Transient">
 </p>
+
+The average inductor current matches the input current because the inductor sits directly in series with the input source. The boost converter's control circuit modulates the MOSFET to regulate output voltage, but the inductor's average current is determined entirely by how much power the circuit draws from the input. The RMS value is slightly higher due to current ripple — the inductor current oscillates around the average as the MOSFET switches on and off at the switching frequency.
 
 ## 3.   What is the steady-state output power (in watts)?
 80.4
