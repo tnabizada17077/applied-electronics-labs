@@ -1,6 +1,6 @@
 LTspice 26.0.2 for Windows
 Circuit: C:\Projects\applied-electronics-labs\cu-boulder-power-electronics\01-boost-converter-simulation\boost.net
-Start Time: Thu Jul 16 14:33:12 2026
+Start Time: Tue Jul 21 12:01:50 2026
 Options:reltol=0.0005
 solver = Normal
 Maximum thread count: 12
@@ -9,7 +9,7 @@ temp = 27
 method = trap
 reltol = 0.0005
 Per .tran options, skipping operating point for transient analysis.
-Total elapsed time: 5.447 seconds.
+Total elapsed time: 5.800 seconds.
 
 Files loaded:
 C:\Projects\applied-electronics-labs\cu-boulder-power-electronics\01-boost-converter-simulation\boost.net
