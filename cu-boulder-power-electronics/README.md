@@ -1,10 +1,7 @@
-# University of Colorado Boulder
-## Department of Electrical, Computer and Energy Engineering
-### Graduate Coursework: Fundamentals of Power Electronics (MS-ECE Curriculum)
+University of Colorado Boulder — Power Electronics Specialization
+Introduction to Power Electronics, Colorado University Boulder
 
-This directory serves as a dedicated repository for my academic coursework, circuit simulations, and technical design logs aligned with the **University of Colorado Boulder’s Graduate Program in Electrical and Computer Engineering (MS-ECE)**. 
-
-The focus of this curriculum is the rigorous mathematical modeling, steady-state analysis, and closed-loop control of switch-mode power converters. By translating advanced power electronics theory into verified hardware simulations, these modules demonstrate practical proficiency in high-efficiency power design, component optimization, and control loop stability.
+This directory documents my work through CU Boulder’s Power Electronics Specialization - covering steady-state converter analysis, equivalent circuit modeling, losses, and efficiency. Coursework is applied here through independent LTspice simulation, worked derivations, and measured-vs-theoretical validation.
 
 ---
 
