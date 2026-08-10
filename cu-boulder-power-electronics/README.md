@@ -1,5 +1,6 @@
-University of Colorado Boulder — Power Electronics Specialization
-Introduction to Power Electronics, Colorado University Boulder
+# University of Colorado Boulder — Power Electronics Specialization
+
+## Introduction to Power Electronics, Colorado University Boulder
 
 This directory documents my work through CU Boulder’s Power Electronics Specialization - covering steady-state converter analysis, equivalent circuit modeling, losses, and efficiency. Coursework is applied here through independent LTspice simulation, worked derivations, and measured-vs-theoretical validation.
 
