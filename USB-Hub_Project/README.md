@@ -8,7 +8,7 @@ The QuadPort USB Hub is a 4-port USB 2.0 hub built around the **FE1.1S** hub con
 
 The project has two parts: the electrical schematic (designed in EasyEDA Pro) and a custom enclosure sized to fit the board with mounting standoffs and connector cutouts.
 
-## Hardware — schematic design and review
+## Hardware- schematic design and review
 
 The initial schematic connected the FE1.1S's core USB signal pins (the four downstream D+/D- pairs, the upstream D+/D-, the crystal oscillator, and REXT bias resistor) correctly, but a review against the FE1.1S datasheet's pin description table found that several pins were left unconnected that are actually required for correct operation, since a bare EasyEDA library symbol had generically labeled some of them "NC" rather than their real datasheet functions.
 
