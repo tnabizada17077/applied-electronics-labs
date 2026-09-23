@@ -51,5 +51,7 @@ Board and component heights were measured directly from the imported STEP geomet
 The design targets **ABS** for its heat resistance, given that four active USB ports drawing power will generate some heat around the controller and connectors. ABS requires an enclosed, heated-bed printer to avoid warping; **PETG** is the planned fallback if cost or printer access makes ABS impractical, offering similar heat tolerance with a more forgiving print process. PLA remains an option for early prototype/fit-check prints before committing to a final material.
 
 ### The final PCB Design:
-
+<p align="center">
+  <img src="PCB.png" width="600">
+</p>
 
