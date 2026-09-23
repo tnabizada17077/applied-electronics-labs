@@ -16,7 +16,6 @@ Simulation and analysis work following CU Boulder's Power Electronics
 Specialization (Introduction to Power Electronics, Course 1 of 6). Covers 
 steady-state converter analysis, equivalent circuit modeling with losses, 
 and LTspice-validated efficiency measurements.
-- **Status:** In progress
 - **Latest module:** Boost converter - 94.8% measured efficiency, 
   theoretical vs. simulated validation across output voltage, inductor 
   current, and power loss
@@ -24,8 +23,10 @@ and LTspice-validated efficiency measurements.
 ### [02 · Lab Watering System](./lab-watering-system/README.md)
 Embedded sensor-driven watering system - soil moisture sensing, MCU-based 
 control logic, and pump/valve actuation.
-- **Status:** Planned, not yet started
 - **Scope (planned):** Sensor calibration, control loop design, 
   power budget for battery/solar operation
 
+### [03 · USB_Hub](./USB-Hub_Project/README.md)
+Hardware and mechanical design of a 4-port USB 2.0 hub built around the FE1.1S controller. Covers schematic review and correction in EasyEDA Pro, PCB design, and a custom 3D-printed enclosure designed in Shapr3D.
+- **Latest module: Custom enclosure — PCB integration, mounting standoffs, and connector cutouts
 ---
