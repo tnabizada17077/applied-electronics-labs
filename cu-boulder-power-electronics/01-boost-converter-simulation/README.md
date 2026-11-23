@@ -1,8 +1,31 @@
+# Module 01: Boost Converter Simulation (open loop)
+
+## In 30 seconds
+
+A boost converter raises a DC voltage. I built one in LTspice (24 V in, about 40 V out, 20 Ω load), calculated what theory predicts, simulated it, and compared.
+
+| Quantity | Theory | LTspice | Difference |
+|----------|--------|---------|------------|
+| Output voltage, duty cycle 0.4 | 40.0 V | 40.101 V | +0.25% |
+| Output voltage, duty cycle 0.6 | 60.0 V | 60.079 V | +0.13% |
+| Average inductor current | 3.33 A (lossless) | 3.527 A | +5.8% |
+| Output power | 80.0 W | 80.375 W | +0.5% |
+| Input power | 80.0 W (lossless) | 84.75 W | +5.9% |
+| Efficiency | 100% (lossless) | 94.8% | |
+
+**Reading the table:** about 4.4 W is lost as heat, so the converter draws more current than a lossless one would. Simulated output voltage is within 0.3% of theory.
+
+**Setup:** 24 V source, MOSFET IRFS4010, diode RF1601NS2D, inductor winding resistance 100 mΩ, 20 Ω load, fixed-duty PWM (no feedback).
+
+**Terms:** *duty cycle* is the fraction of each cycle the switch is on. *Steady state* means the circuit has settled and the averages stop changing. *Ripple* is the small up-and-down wiggle around an average.
+
 <p align="center">
   <img src="./images/fullTransient.png" width="450" alt="Full Output Voltage Transient">
 </p>
 
-## 1. What	is	the	steady-state average	output	voltage	(expressed	in	volts)?
+<p align="center"><em>Output voltage from start-up to steady state. The averages below are taken after the output has settled.</em></p>
+
+## 1. What	is	the	steady-state average	output	voltage	(in	volts)?
 
 ### Theoretical Expected Value
 If this circuit were 100% perfect and lossless, the math for a boost converter says our $24\text{ V}$ input at a $40\%$ duty cycle ($D = 0.4$) should give us exactly **$40\text{ V}$** on the output:
@@ -18,11 +41,12 @@ Real circuits have losses, so the simulation won't hit a perfect $40\text{ V}$. 
   <img src="./images/avgVoltage.png" width="450" alt="Full Output Voltage Transient">
 </p>
 
-These simulated components are "stealing" that extra voltage:
+**Result:** 40.101 V simulated against 40.0 V ideal (+0.25%).
 
-1. **The Inductor's Wire ($R_L = 100\text{ m}\Omega$):** The inductor has internal copper resistance that burns off power as heat.
-2. **The Diode Drop ($D1$):** The `RF1601NS2D` diode takes about $0.8\text{ V}$ to $1\text{ V}$ just to let current pass through it.
-3. **The MOSFET Switch ($M1$):** The `IRFS4010` transistor isn't a perfect conductor; it has a tiny internal resistance when turned on.
+Real components waste energy, and losses normally push a boost converter's output *below* the ideal value $V_{out}=\frac{V_g}{1-D}$, so losses do not explain a result slightly above 40.0 V. I have not yet traced the exact cause. Possible causes:
+
+1. The PWM source's actual on-time differs slightly from exactly 0.4 because of finite rise and fall times.
+2. The averaging window (4.5 to 5.0 ms) is not a whole number of switching periods, or the output has not fully settled.
 
 ## 2.	What	is	the	steady-state	average	inductor	current	(in	amps)?
 
