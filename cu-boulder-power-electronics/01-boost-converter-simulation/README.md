@@ -32,7 +32,7 @@ If this circuit were 100% perfect and lossless, the math for a boost converter s
 
 $$V_{out} = \frac{V_g}{1 - D} = \frac{24\text{ V}}{1 - 0.4} = 40.0\text{ V}$$
 
-### What LTspice Actually Measured
+### What LTspice Actually Simulated
 Real circuits have losses, so the simulation won't hit a perfect $40\text{ V}$. After letting the simulation run and settle down ($4.5\text{ ms}$ to $5.0\text{ ms}$), I used `Ctrl + Click` on the `V(vout)` trace to find the true average:
 
 * **Theoretical Perfect Output:** $40.0\text{ V}$
@@ -48,27 +48,24 @@ Real components waste energy, and losses normally push a boost converter's outpu
 1. The PWM source's actual on-time differs slightly from exactly 0.4 because of finite rise and fall times.
 2. The averaging window (4.5 to 5.0 ms) is not a whole number of switching periods, or the output has not fully settled.
 
-## 2.	What	is	the	steady-state	average	inductor	current	(in	amps)?
+## 2. What is the steady-state average inductor current (in amps)?
 
-### Theoretical Expected Value
-In a boost converter, the inductor is in series with the input source, so its average current must equal the input current. Using power balance:
+In a boost converter the inductor is in series with the input source, so the average inductor current equals the average input current.
 
-$$I_{in,avg} = \frac{P_{in}}{V_g} = \frac{P_{out}}{V_g \cdot \eta}$$
+For a lossless converter, $P_{in}=P_{out}$, so
+$$I_{in}=\frac{P_{out}}{V_g}=\frac{80\ \text{W}}{24\ \text{V}}\approx 3.33\ \text{A}$$
 
-From the output power (80.4 W) and knowing losses exist, the input current should be roughly:
+Losses make the input current higher. As a consistency check (not an independent prediction), using the simulated efficiency of 94.8%:
+$$I_{in}\approx\frac{80.375\ \text{W}}{0.948\cdot 24\ \text{V}}\approx 3.53\ \text{A}$$
 
-$$I_{in,avg} \approx \frac{84.75\text{ W}}{24\text{ V}} \approx 3.53\text{ A}$$
+**Simulated:** average 3.527 A, RMS 3.538 A. The 5.8% gap from the lossless value is the cost of losses.
 
-### What LTspice Actually Measured
-After the circuit reached steady state (interval: 4.82 ms to 4.99999 ms):
-
-* **Average Inductor Current:** `3.52666 A`
-* **RMS Inductor Current:** `3.5384 A`
 <p align="center">
-  <img src="./images/avgCurrent.png" width="450" alt="Full Output Voltage Transient">
+  <img src="./images/avgCurrent.png" width="450" alt="Inductor current waveform with its average value">
 </p>
+<p align="center"><em>Inductor current in steady state: a triangular ripple around the average.</em></p>
 
-The average inductor current matches the input current because the inductor sits directly in series with the input source. The boost converter's control circuit modulates the MOSFET to regulate output voltage, but the inductor's average current is determined entirely by how much power the circuit draws from the input. The RMS value is slightly higher due to current ripple — the inductor current oscillates around the average as the MOSFET switches on and off at the switching frequency.
+The average inductor current is set by the power drawn from the input, because the inductor sits directly in series with the source. The MOSFET switches on and off at the switching frequency, so the current rises and falls around the average. This ripple is why the RMS value (3.538 A) is slightly higher than the average (3.527 A).
 
 ## 3.   What is the steady-state output power (in watts)?
 
@@ -77,32 +74,26 @@ With an ideal output voltage of 40 V across a $20\,\Omega$ resistive load, the t
 
 $$P_{out} = \frac{V_{out}^2}{R_{load}} = \frac{(40\text{ V})^2}{20\ \Omega} = 80.0\text{ W}$$
 
-### What LTspice Actually Measured
+### What LTspice Actually Simulated
 Using the actual simulated average voltage of 40.101V, the real steady-state power delivered to the load is:
 
 $$80.375 W$$
 
 The simulated output power is slightly higher than the ideal 80 W because the actual steady-state voltage (40.101 V) exceeds the theoretical value (40.0 V). ($P = V^2/R$)
 
-## 4. What is the average power drawn out of the input source Vg during steady-state operation of the converter (in watts)?
+## 4. What is the average power drawn from the input source Vg during steady-state operation (in watts)?
 
-### Theoretical Expected Value
+### Theoretical expected value
 
-In a boost converter, input power must account for all losses in the system. Using the average inductor current from Q2 (3.52666 A) and the input voltage (24 V):
+For a lossless converter, $P_{in}=P_{out}\approx 80\ \text{W}$.
 
-$$P_{in} = V_g \times I_{in,avg} = 24\text{ V} \times 3.52666\text{ A} = 84.64\text{ W}$$
+### What LTspice simulated
 
-Alternatively, knowing the output power (80.375 W) and that real converters have losses, the input power must be higher:
+**Simulated input power:** 84.75 W. About 4.4 W (5%) is lost as heat in the inductor winding resistance, the MOSFET and the diode.
 
-$$P_{in} = \frac{P_{out}}{\eta} \approx \frac{80.375\text{ W}}{0.948} \approx 84.75\text{ W}$$
+Cross-check: $24\ \text{V}\times 3.527\ \text{A}=84.64\ \text{W}$. This is within 0.15% of 84.75 W. The small difference probably comes from averaging over slightly different time intervals.
 
-### What LTspice Actually Measured
-
-The simulated average power drawn from the input source during steady-state:
-
-**Simulated Input Power:** `84.75 W`
-
-The input power (84.75 W) is noticeably higher than the output power (80.375 W) because energy is dissipated as heat in the inductor resistance, MOSFET on-resistance, and diode forward drop. The difference of approximately 4.4 W represents power loss in the converter. This loss is why the converter efficiency (calculated in Q6) is less than 100% — real circuits always dissipate some energy.
+The input power is higher than the output power (80.375 W) because of this lost energy. This loss is why the converter efficiency (calculated in Q6) is below 100%.
 
 ## 5. What is the average power consumption of the gate driver (in watts)?
 
@@ -118,7 +109,7 @@ where:
 
 For the `IRFS4010` MOSFET with typical gate charge around 45 nC and assuming a switching frequency of approximately 100 kHz, the expected gate driver power would be in the range of **0.2–0.3 W**, a small fraction of the total converter power.
 
-### What LTspice Actually Measured
+### What LTspice Actually Simulated
 The simulated average power consumed by the gate driver circuit during steady-state:
 
 * **Initial measurement (incorrect):** `-204.31 mW`; negative value indicated a measurement error
@@ -135,15 +126,21 @@ $$\eta_{ideal} = 1.0 \text{ (or 100\%)}$$
 
 However, real converters have component losses (inductor resistance, diode drop, MOSFET on-resistance), so efficiency is always less than 100%.
 
-### What LTspice Actually Measured
+### What LTspice Actually Simulated
 The simulated converter efficiency during steady-state operation:
 
 $$\eta = \frac{P_{out}}{P_{in}} = \frac{80.375\text{ W}}{84.754\text{ W}} = \mathbf{0.94833}$$
 
 **Simulated Efficiency:** `0.94833` or **94.83%**
 
-### Analysis: Why Efficiency is 94.83%
-The 5.17% power loss comes from three main sources identified in Q1: inductor copper resistance (heating), diode forward voltage drop, and MOSFET on-resistance. These component imperfections consume approximately 4.4 W (84.75 W input − 80.375 W output), preventing ideal 100% efficiency. For a real-world power converter, 94.8% efficiency is actually quite good and demonstrates effective energy transfer despite unavoidable component losses.
+### Analysis
+The converter loses about 4.4 W (84.754 W in, 80.375 W out), which is 5.17% of the input. The losses come from:
+
+- **Diode forward drop:** roughly 0.8 to 1 V while the diode conducts.
+- **Inductor winding resistance:** 100 mΩ in this simulation.
+- **MOSFET on-resistance:** only a few milliohms, so it contributes little.
+
+By a rough hand estimate the diode and the inductor winding are the largest contributors. 94.8% is a reasonable efficiency for a 24 V to 40 V converter at 80 W.
 
 ## 7. Now change the control voltage input to the pulse-width modulator, so that it produces a control signal having a duty cycle of 0.6. Run the simulation again. What is the new steady-state average output voltage?
 
@@ -154,7 +151,7 @@ $$V_{out} = \frac{V_g}{1 - D} = \frac{24\text{ V}}{1 - 0.6} = \frac{24\text{ V}}
 
 With higher duty cycle, the converter steps up the voltage more aggressively, resulting in a higher output voltage.
 
-### What LTspice Actually Measured
+### What LTspice Actually Simulated
 After adjusting the PWM duty cycle to 0.6 and allowing the simulation to reach steady state:
 
 **Simulated Output Voltage:** `60.079 V`
@@ -166,4 +163,9 @@ After adjusting the PWM duty cycle to 0.6 and allowing the simulation to reach s
 (Initial measurement of 180.72 V was incorrect due to improper steady-state interval selection.)
 
 ### Analysis: Increased Voltage Boost with Higher Duty Cycle
-The simulated output voltage (60.079 V) closely matches the theoretical prediction (60.0 V), confirming the boost converter equation scales with duty cycle. Higher duty cycle ($D = 0.6$ vs $D = 0.4$) means the MOSFET stays on longer, storing more energy in the inductor before releasing it to the output. This increases the voltage multiplication ratio from 1.67× at D=0.4 to 2.5× at D=0.6. The small 0.079 V overshoot is again due to component losses, consistent with the behavior seen in Q1.
+The simulated output voltage (60.079 V) closely matches the theoretical prediction (60.0 V), confirming the boost converter equation scales with duty cycle. Higher duty cycle ($D = 0.6$ vs $D = 0.4$) means the MOSFET stays on longer, storing more energy in the inductor before releasing it to the output. Simulated 60.079 V against 60.0 V ideal (+0.13%). The voltage ratio $V_{out}/V_g$ rose from 1.67 at $D=0.4$ to 2.5 at $D=0.6$, as $\frac{1}{1-D}$ predicts. As in Q1, the small positive offset is not a loss effect.
+
+## What I learned
+
+- My first reading at $D=0.6$ was 180.72 V. I had averaged over the start-up transient instead of steady state. Always check the averaging window before trusting a number.
+- Comparing theory with simulation only means something when the theory is calculated independently of the simulation.
