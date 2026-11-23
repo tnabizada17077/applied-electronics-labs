@@ -25,7 +25,7 @@ A boost converter raises a DC voltage. I built one in LTspice (24 V in, about 40
 
 <p align="center"><em>Output voltage from start-up to steady state. The averages below are taken after the output has settled.</em></p>
 
-## 1. What	is	the	steady-state average	output	voltage	(in	volts)?
+## 1. What is the steady-state average output voltage (in volts)?
 
 ### Theoretical Expected Value
 If this circuit were 100% perfect and lossless, the math for a boost converter says our $24\text{ V}$ input at a $40\%$ duty cycle ($D = 0.4$) should give us exactly **$40\text{ V}$** on the output:
@@ -33,12 +33,13 @@ If this circuit were 100% perfect and lossless, the math for a boost converter s
 $$V_{out} = \frac{V_g}{1 - D} = \frac{24\text{ V}}{1 - 0.4} = 40.0\text{ V}$$
 
 ### What LTspice Actually Simulated
-Real circuits have losses, so the simulation won't hit a perfect $40\text{ V}$. After letting the simulation run and settle down ($4.5\text{ ms}$ to $5.0\text{ ms}$), I used `Ctrl + Click` on the `V(vout)` trace to find the true average:
+The simulation will not give exactly $40\text{ V}$, so I compare the simulated average with the ideal value. After letting the simulation run and settle down ($4.5\text{ ms}$ to $5.0\text{ ms}$), I used `Ctrl + Click` on the `V(vout)` trace to find the true average:
 
 * **Theoretical Perfect Output:** $40.0\text{ V}$
-* **Actual Simulated Average :** `40.101 V`
+* **Actual Simulated Average :** `40.101 V`*
+
 <p align="center">
-  <img src="./images/avgVoltage.png" width="450" alt="Full Output Voltage Transient">
+  <img src="./images/avgVoltage.png" width="450" alt="Average output voltage in steady state">
 </p>
 
 **Result:** 40.101 V simulated against 40.0 V ideal (+0.25%).
@@ -77,7 +78,7 @@ $$P_{out} = \frac{V_{out}^2}{R_{load}} = \frac{(40\text{ V})^2}{20\ \Omega} = 80
 ### What LTspice Actually Simulated
 Using the actual simulated average voltage of 40.101V, the real steady-state power delivered to the load is:
 
-$$80.375 W$$
+$$P_{out} = \frac{(40.101\ \text{V})^2}{20\ \Omega} \approx 80.4\ \text{W}$$
 
 The simulated output power is slightly higher than the ideal 80 W because the actual steady-state voltage (40.101 V) exceeds the theoretical value (40.0 V). ($P = V^2/R$)
 
@@ -117,7 +118,7 @@ The simulated average power consumed by the gate driver circuit during steady-st
 
 The gate driver consumes approximately 0.204 W, which is negligible compared to the output power (80.375 W). This represents only about 0.24% of the total input power, making gate driver loss a minor contributor to overall converter inefficiency. Most energy loss comes from component resistances (inductor, MOSFET, diode) rather than gate driving.
 
-## 6. What is the converter efficiency (enter a numeric value between 0 and 1)?
+## 6. What is the converter efficiency?
 
 ### Theoretical Expected Value
 In an ideal boost converter with no losses, 100% of input power transfers to output power, giving an efficiency of:
@@ -157,13 +158,13 @@ After adjusting the PWM duty cycle to 0.6 and allowing the simulation to reach s
 **Simulated Output Voltage:** `60.079 V`
 
 <p align="center">
-  <img src="./images/outVoltage.png" width="450" alt="Full Output Voltage Transient">
+  <img src="./images/outVoltage.png" width="450" alt="Output voltage at duty cycle 0.6">
 </p>
 
 (Initial measurement of 180.72 V was incorrect due to improper steady-state interval selection.)
 
 ### Analysis: Increased Voltage Boost with Higher Duty Cycle
-The simulated output voltage (60.079 V) closely matches the theoretical prediction (60.0 V), confirming the boost converter equation scales with duty cycle. Higher duty cycle ($D = 0.6$ vs $D = 0.4$) means the MOSFET stays on longer, storing more energy in the inductor before releasing it to the output. Simulated 60.079 V against 60.0 V ideal (+0.13%). The voltage ratio $V_{out}/V_g$ rose from 1.67 at $D=0.4$ to 2.5 at $D=0.6$, as $\frac{1}{1-D}$ predicts. As in Q1, the small positive offset is not a loss effect.
+The simulated output voltage is 60.079 V against 60.0 V ideal (+0.13%), so the boost converter equation scales with duty cycle as expected. A higher duty cycle ($D = 0.6$ vs $D = 0.4$) keeps the MOSFET on longer, storing more energy in the inductor before releasing it to the output. The voltage ratio $V_{out}/V_g$ rose from 1.67 at $D=0.4$ to 2.5 at $D=0.6$, as $\frac{1}{1-D}$ predicts. As in Q1, the small positive offset is not a loss effect.
 
 ## What I learned
 
