@@ -36,7 +36,7 @@ $$V_{out} = \frac{V_g}{1 - D} = \frac{24\text{ V}}{1 - 0.4} = 40.0\text{ V}$$
 The simulation will not give exactly $40\text{ V}$, so I compare the simulated average with the ideal value. After letting the simulation run and settle down ($4.5\text{ ms}$ to $5.0\text{ ms}$), I used `Ctrl + Click` on the `V(vout)` trace to find the true average:
 
 * **Theoretical Perfect Output:** $40.0\text{ V}$
-* **Actual Simulated Average :** `40.101 V`*
+* **Actual Simulated Average:** `40.101 V`
 
 <p align="center">
   <img src="./images/avgVoltage.png" width="450" alt="Average output voltage in steady state">
@@ -57,6 +57,7 @@ For a lossless converter, $P_{in}=P_{out}$, so
 $$I_{in}=\frac{P_{out}}{V_g}=\frac{80\ \text{W}}{24\ \text{V}}\approx 3.33\ \text{A}$$
 
 Losses make the input current higher. As a consistency check (not an independent prediction), using the simulated efficiency of 94.8%:
+
 $$I_{in}\approx\frac{80.375\ \text{W}}{0.948\cdot 24\ \text{V}}\approx 3.53\ \text{A}$$
 
 **Simulated:** average 3.527 A, RMS 3.538 A. The 5.8% gap from the lossless value is the cost of losses.
