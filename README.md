@@ -1,32 +1,24 @@
 # Applied Electronics Labs
 
-Self-directed engineering repository containing academic power electronics 
-simulations and personal hardware/IoT prototypes.
+Hands-on electronics and power electronics work by Toghrul Nabizada, Electrical & Electronics Engineering student at ADA University and Politecnico di Torino (dual degree, expected 2028).
 
-This repository serves as a running technical log of coursework-driven 
-simulations, independent design work, and hardware prototyping - organized 
-by project area. Each directory is self-contained with its own README, 
-covering methodology, simulation results, and (where applicable) measured 
-vs. theoretical validation.
+## In 30 seconds
 
-## 🗂️ Project Directory
+- **What this is:** projects where I take a circuit from theory to simulation or hardware, then check the result against the math.
+- **Best examples:** a boost converter simulated in LTspice (94.8% efficiency, output within 0.3% of theory) and a 4-port USB 2.0 hub taken from schematic to PCB to 3D-printed enclosure.
+- **Tools:** LTspice, EasyEDA Pro, Shapr3D.
 
-### [01 · CU Boulder Power Electronics](./cu-boulder-power-electronics/README.md)
-Simulation and analysis work following CU Boulder's Power Electronics 
-Specialization (Introduction to Power Electronics, Course 1 of 6). Covers 
-steady-state converter analysis, equivalent circuit modeling with losses, 
-and LTspice-validated efficiency measurements.
-- **Latest module:** Boost converter - 94.8% measured efficiency, 
-  theoretical vs. simulated validation across output voltage, inductor 
-  current, and power loss
+## Projects
 
-### [02 · Lab Watering System](./lab-watering-system/README.md)
-Embedded sensor-driven watering system - soil moisture sensing, MCU-based 
-control logic, and pump/valve actuation.
-- **Scope (planned):** Sensor calibration, control loop design, 
-  power budget for battery/solar operation
+| # | Project | What it is, in plain words | Status |
+|---|---------|----------------------------|--------|
+| 1 | [CU Boulder Power Electronics](./cu-boulder-power-electronics/README.md) | Simulating DC-DC converters (circuits that step a voltage up or down) and checking them against theory | Course 1 of 6 done. Latest: boost converter |
+| 2 | [USB hub](./USB-Hub_Project/README.md) | A 4-port USB 2.0 hub: schematic, PCB, and a custom 3D-printed case | [Designed / built and tested] |
 
-### [03 · USB_Hub](./USB-Hub_Project/README.md)
-Hardware and mechanical design of a 4-port USB 2.0 hub built around the FE1.1S controller. Covers schematic review and correction in EasyEDA Pro, PCB design, and a custom 3D-printed enclosure designed in Shapr3D.
-- **Latest module: Custom enclosure — PCB integration, mounting standoffs, and connector cutouts
----
+## How I work
+
+1. Calculate what theory predicts.
+2. Simulate or build it.
+3. Compare, and explain any gap.
+
+I include my mistakes in the write-ups, because finding them is part of the work.
